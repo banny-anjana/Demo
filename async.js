@@ -36,3 +36,45 @@ p3.catch((error)=>{
 let p3 = new Promise((resolve, reject) => {
     reject("Failures");
 });
+
+function fetchUsers(){
+let res = window.fetch("https://jsonplaceholder.typicode.com/users")
+//console.log(res);
+res.then(val => {
+    //console.log(val);
+    return val.json().then(data => {
+        console.log(data);
+    });
+}).catch(err => {
+    console.log(err);
+})
+}
+fetchUsers();
+
+// ! Api fetching
+function fetchUsers(){
+let res = window.fetch("https://jsonplaceholder.typicode.com/users")
+//console.log(res);
+res.then(val => {
+    //console.log(val);
+    return val.json().then(data => {
+        console.log(data);
+        let store = document.getElementById("store");
+        //console.log(store);
+        data.map((user) => {
+            //console.log(user);
+            store.innerHTML += `
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.company.name}</td>
+            </tr>
+            `
+        })
+    });
+}).catch(err => {
+    console.log(err);
+})
+}
+fetchUsers();
